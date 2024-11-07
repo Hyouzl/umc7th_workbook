@@ -13,7 +13,6 @@ import umc.spring.web.service.StoreQueryService;
 @EnableJpaAuditing
 @EntityScan(basePackages = "umc.spring.domain") // 엔티티 스캔 추가
 public class Application {
-
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
 	}
