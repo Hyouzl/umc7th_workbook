@@ -7,7 +7,7 @@ import java.util.List;
 public interface MemberMissionRepositoryCustom {
 
 
-    public List<MemberMissionDto> findMemberMissionByStatus (Long memberId, String status, int cursor);
+    List<MemberMissionDto> findMemberMissionByStatus (Long memberId, String status, int cursor);
 
 
 
