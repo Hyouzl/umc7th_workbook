@@ -7,8 +7,7 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
-import umc.spring.web.service.member.MemberQueryService;
-import umc.spring.web.service.mission.MissionQueryService;
+import umc.spring.service.member.MemberQueryService;
 
 @SpringBootApplication
 @EnableJpaAuditing

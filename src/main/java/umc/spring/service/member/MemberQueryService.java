@@ -1,4 +1,4 @@
-package umc.spring.web.service.member;
+package umc.spring.service.member;
 
 import umc.spring.web.dto.MemberDto;
 

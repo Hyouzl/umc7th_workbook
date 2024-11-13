@@ -1,4 +1,4 @@
-package umc.spring.web.service.mission;
+package umc.spring.service.mission;
 
 import umc.spring.web.dto.MissionDto;
 

@@ -1,4 +1,4 @@
-package umc.spring.web.service.memberMission;
+package umc.spring.service.memberMission;
 
 
 import lombok.RequiredArgsConstructor;
@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import umc.spring.web.dto.MemberMissionDto;
 import umc.spring.web.repository.memberMission.MemberMissionRepository;
-import umc.spring.web.repository.memberMission.MemberMissionRepositoryImpl;
 
 import java.util.List;
 
