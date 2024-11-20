@@ -34,6 +34,14 @@ public class Store extends BaseEntity {
     private List<Mission> missionList = new ArrayList<>();
 
 
+    public void setRegion(Region region){
+        if(this.region != null)
+            region.getStoreList().remove(this);
+
+        this.region = region;
+        region.getStoreList().add(this);
+    }
+
     @Override
     public String toString() {
         return "Store{" +
