@@ -1,8 +1,9 @@
 package umc.spring.web.dto;
 
 import com.querydsl.core.annotations.QueryProjection;
-import lombok.Data;
+import lombok.*;
 import umc.spring.domain.enums.MissionStatus;
+import umc.spring.domain.mapping.MemberMission;
 
 @Data
 public class MemberMissionDto {
@@ -11,7 +12,6 @@ public class MemberMissionDto {
     private String missionSpec;
     private Integer reward;
     private MissionStatus missionStatus;
-
     private String storeName;
     private float storeScore;
 
@@ -25,6 +25,27 @@ public class MemberMissionDto {
         this.storeName = storeName;
         this.storeScore = storeScore;
     }
+
+
+    @Builder
+    @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class resultAddMemberMission {
+        Long memberMissionId;
+        Long missionId;
+        Long memberId;
+
+    }
+
+
+    @Getter
+    public static class addMemberMissionDto {
+        Long missionId;
+        Long memberId;
+    }
+
+
 
     @Override
     public String toString() {
