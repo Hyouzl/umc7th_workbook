@@ -14,7 +14,8 @@ public interface MemberMissionService {
 
     MemberMission addMemberMission(MemberMissionDto.addMemberMissionDto addMemberMissionDto);
     boolean existMemberMission (Long missionId, Long memberId);
-    Optional<MemberMission> findMemberMission (Long missionId);
+    Optional<MemberMission> findMemberMission (Long MemberMissionId);
+
 
 
 }

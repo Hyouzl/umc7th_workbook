@@ -10,6 +10,5 @@ import java.util.List;
 import java.util.Optional;
 
 public interface MemberMissionRepository extends JpaRepository<MemberMission, Long>, MemberMissionRepositoryCustom {
-
     Page<MemberMission> findByMember(Member member, PageRequest pageRequest);
 }

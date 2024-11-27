@@ -5,6 +5,7 @@ import lombok.*;
 import umc.spring.domain.enums.MissionStatus;
 import umc.spring.domain.mapping.MemberMission;
 import umc.spring.validation.annotation.AlreadyExistMemberMissions;
+import umc.spring.validation.annotation.ExistMemberMission;
 import umc.spring.validation.annotation.ExistMissions;
 
 @Data
@@ -47,6 +48,13 @@ public class MemberMissionDto {
         @ExistMissions
         @AlreadyExistMemberMissions
         Long missionId;
+    }
+
+    @Getter
+    public static class updateMemberMissionStatusDto {
+
+        @ExistMemberMission
+        Long memberMissionId;
     }
 
 

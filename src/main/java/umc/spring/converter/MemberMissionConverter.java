@@ -13,9 +13,9 @@ import java.util.stream.Collectors;
 public class MemberMissionConverter {
 
 
-    public static MemberResponseDto.memberMissionInChallengingPreviewDto memberMissionInChallengingPreviewDto (MemberMission memberMission) {
+    public static MemberResponseDto.memberMissionPreviewDto memberMissionPreviewDto (MemberMission memberMission) {
 
-        return MemberResponseDto.memberMissionInChallengingPreviewDto.builder()
+        return MemberResponseDto.memberMissionPreviewDto.builder()
                 .storeName(memberMission.getMission().getStore().getName())
                 .missionSpec(memberMission.getMission().getMissionSpec())
                 .reward(memberMission.getMission().getReward())
@@ -24,16 +24,16 @@ public class MemberMissionConverter {
 
     }
 
-    public static MemberResponseDto.memberMissionListInChallengingPreviewDto memberMissionListInChallengingPreviewDto (Page<MemberMission> pageMemberMissionList) {
+    public static MemberResponseDto.memberMissionListPreviewDto memberMissionListInChallengingPreviewDto (Page<MemberMission> pageMemberMissionList) {
 
-        List<MemberResponseDto.memberMissionInChallengingPreviewDto> memberMissionInChallengingPreviewDtoList
+        List<MemberResponseDto.memberMissionPreviewDto> memberMissionPreviewDtoList
                 = pageMemberMissionList.stream()
                 .filter(memberMission -> MissionStatus.CHALLENGING.equals(memberMission.getMissionStatus()))
-                .map(MemberMissionConverter::memberMissionInChallengingPreviewDto)
+                .map(MemberMissionConverter::memberMissionPreviewDto)
                 .collect(Collectors.toList());
 
-        return MemberResponseDto.memberMissionListInChallengingPreviewDto.builder()
-                .memberMissionList(memberMissionInChallengingPreviewDtoList)
+        return MemberResponseDto.memberMissionListPreviewDto.builder()
+                .memberMissionList(memberMissionPreviewDtoList)
                 .listSize(pageMemberMissionList.getSize())
                 .totalElements(pageMemberMissionList.getTotalElements())
                 .isFirst(pageMemberMissionList.isFirst())

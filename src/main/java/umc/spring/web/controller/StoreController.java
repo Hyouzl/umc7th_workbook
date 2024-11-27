@@ -54,7 +54,7 @@ public class StoreController {
             @Parameter(name = "storeId", description = "가게의 아이디, path variable 입니다!")
     })
     public ApiResponse<StoreResponseDto.ReviewPreviewListDto> getReviewList(@ExistStore @PathVariable(name = "storeId") Long storeId,@CheckPage @RequestParam(name = "page") Integer page){
-        Page<Review> pageReviewList = storeQueryService.getReviewList(storeId,page);
+        Page<Review> pageReviewList = storeQueryService.getReviewList(storeId,page-1);
 
         return ApiResponse.onSuccess(StoreConverter.reviewPreViewListDTO(pageReviewList));
     }

@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.validation.annotation.Validated;
@@ -20,6 +21,8 @@ import umc.spring.service.member.MemberCommandService;
 import umc.spring.service.member.MemberQueryService;
 import umc.spring.validation.annotation.CheckPage;
 import umc.spring.validation.annotation.ExistCategories;
+import umc.spring.validation.annotation.ExistMemberMission;
+import umc.spring.web.dto.MemberMissionDto;
 import umc.spring.web.dto.MemberRequestDto;
 import umc.spring.web.dto.MemberResponseDto;
 import umc.spring.web.dto.MissionResponseDto;
@@ -67,13 +70,29 @@ public class MemberController {
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "AUTH004", description = "acess 토큰 만료",content = @Content(schema = @Schema(implementation = ApiResponse.class))),
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "AUTH006", description = "acess 토큰 모양이 이상함",content = @Content(schema = @Schema(implementation = ApiResponse.class))),
     })
-    public ApiResponse<MemberResponseDto.memberMissionListInChallengingPreviewDto> getMissionList (@CheckPage @RequestParam(name = "page") Integer page) {
+    public ApiResponse<MemberResponseDto.memberMissionListPreviewDto> getMissionList (@CheckPage @RequestParam(name = "page") Integer page) {
 
         Page<MemberMission> getMyMissionList = memberQueryService.getMyMissionList(page-1);
 
         return ApiResponse.onSuccess(MemberMissionConverter.memberMissionListInChallengingPreviewDto(getMyMissionList));
     }
 
+    @PatchMapping("/users/missions")
+    //@Operation은 이 API에 대한 설명을 넣게 되며 summary, description으로 설명을 적습니다.
+    @Operation(summary = "진행중인 미션 진행 완료로 바꾸기 API",description = "진행중인 미션 진행 완료로 바꾸는 API")
+    //@ApiResponses로 이 API의 응답을 담게 되며 내부적으로 @ApiResponse로 각각의 응답들을 담게 됩니다.
+    @ApiResponses({
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "COMMON200",description = "OK, 성공"),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "AUTH003", description = "access 토큰을 주세요!",content = @Content(schema = @Schema(implementation = ApiResponse.class))),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "AUTH004", description = "acess 토큰 만료",content = @Content(schema = @Schema(implementation = ApiResponse.class))),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "AUTH006", description = "acess 토큰 모양이 이상함",content = @Content(schema = @Schema(implementation = ApiResponse.class))),
+    })
+    public ApiResponse<MemberResponseDto.memberMissionPreviewDto> updateMissionStatus (@RequestBody @Valid MemberMissionDto.updateMemberMissionStatusDto request) {
 
+        System.out.println(request.getMemberMissionId());
+        MemberMission memberMission = memberQueryService.updateMemberMissionStatus(request.getMemberMissionId());
+
+        return ApiResponse.onSuccess(MemberMissionConverter.memberMissionPreviewDto(memberMission));
+    }
 
 }

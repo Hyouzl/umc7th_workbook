@@ -64,8 +64,8 @@ public class MemberMissionServiceImpl implements MemberMissionService {
     }
 
     @Override
-    public Optional<MemberMission> findMemberMission(Long missionId) {
-        return memberMissionRepository.findById(missionId);
+    public Optional<MemberMission> findMemberMission(Long memberMissionId) {
+        return memberMissionRepository.findById(memberMissionId);
     }
 
 }

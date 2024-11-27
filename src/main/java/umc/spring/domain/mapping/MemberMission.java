@@ -2,6 +2,8 @@ package umc.spring.domain.mapping;
 
 import jakarta.persistence.*;
 import lombok.*;
+import umc.spring.apiPayload.code.status.ErrorStatus;
+import umc.spring.apiPayload.exception.handler.MemberMissionHandler;
 import umc.spring.domain.Member;
 import umc.spring.domain.Mission;
 import umc.spring.domain.common.BaseEntity;
@@ -47,6 +49,14 @@ public class MemberMission extends BaseEntity {
 
         this.mission = mission;
         mission.getMemberMissionList().add(this);
+    }
+
+    public void completedMission () {
+        if(MissionStatus.COMPLETE.equals(this.missionStatus)) {
+            throw new MemberMissionHandler(ErrorStatus.MEMBER_MISSION_NOT_CHALLENGING);
+        }
+
+        this.missionStatus = MissionStatus.COMPLETE;
     }
 
 }

@@ -21,11 +21,13 @@ public class MemberResponseDto {
         LocalDateTime createdAt;
     }
 
+
+
     @Getter
     @Builder
     @NoArgsConstructor
     @AllArgsConstructor
-    public static class memberMissionInChallengingPreviewDto {
+    public static class memberMissionPreviewDto {
 
         String storeName;
         String missionSpec;
@@ -37,9 +39,9 @@ public class MemberResponseDto {
     @Builder
     @NoArgsConstructor
     @AllArgsConstructor
-    public static class memberMissionListInChallengingPreviewDto {
+    public static class memberMissionListPreviewDto {
 
-        List<memberMissionInChallengingPreviewDto> memberMissionList;
+        List<memberMissionPreviewDto> memberMissionList;
         Integer listSize;
         Integer totalPage;
         Long totalElements;
