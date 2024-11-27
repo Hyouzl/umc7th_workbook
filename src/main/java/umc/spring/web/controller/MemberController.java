@@ -36,7 +36,6 @@ public class MemberController {
 
     private final MemberCommandService memberCommandService;
     private final MemberQueryService memberQueryService;
-
     @PostMapping("/users")
     public ApiResponse<MemberResponseDto.JoinResultDTO> join (@ExistCategories @RequestBody MemberRequestDto.JoinDto request) {
         Member member = memberCommandService.joinMember(request);
