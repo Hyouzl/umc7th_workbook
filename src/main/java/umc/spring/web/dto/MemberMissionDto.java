@@ -4,6 +4,8 @@ import com.querydsl.core.annotations.QueryProjection;
 import lombok.*;
 import umc.spring.domain.enums.MissionStatus;
 import umc.spring.domain.mapping.MemberMission;
+import umc.spring.validation.annotation.AlreadyExistMemberMissions;
+import umc.spring.validation.annotation.ExistMissions;
 
 @Data
 public class MemberMissionDto {
@@ -41,8 +43,10 @@ public class MemberMissionDto {
 
     @Getter
     public static class addMemberMissionDto {
+
+        @ExistMissions
+        @AlreadyExistMemberMissions
         Long missionId;
-        Long memberId;
     }
 
 

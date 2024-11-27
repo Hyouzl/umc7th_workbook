@@ -3,9 +3,9 @@ package umc.spring.service.memberMission;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import umc.spring.apiPayload.code.status.ErrorStatus;
-import umc.spring.apiPayload.exception.handler.TempHandler;
+import umc.spring.apiPayload.exception.handler.MemberHandler;
+import umc.spring.apiPayload.exception.handler.MissionHandler;
 import umc.spring.converter.MemberMissionConverter;
 import umc.spring.domain.Member;
 import umc.spring.domain.Mission;
@@ -16,6 +16,7 @@ import umc.spring.web.repository.memberMission.MemberMissionRepository;
 import umc.spring.web.repository.mission.MissionRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -42,10 +43,11 @@ public class MemberMissionServiceImpl implements MemberMissionService {
     public MemberMission addMemberMission(MemberMissionDto.addMemberMissionDto addMemberMissionDto) {
 
         Mission mission = missionRepository.findById(addMemberMissionDto.getMissionId()).orElseThrow(() ->
-                new TempHandler(ErrorStatus.MISSION_NOT_FOUND));
+                new MissionHandler(ErrorStatus.MISSION_NOT_FOUND));
 
-        Member member = memberRepository.findById(addMemberMissionDto.getMemberId()).orElseThrow(() ->
-                new TempHandler(ErrorStatus.MEMBER_NOT_FOUND));
+        // 유저 하드 코딩
+        Member member = memberRepository.findById(1L).orElseThrow(() ->
+                new MemberHandler(ErrorStatus.MEMBER_NOT_FOUND));
 
 
         MemberMission memberMission = MemberMissionConverter.toMemberMission(addMemberMissionDto);
@@ -56,5 +58,14 @@ public class MemberMissionServiceImpl implements MemberMissionService {
         return memberMissionRepository.save(memberMission);
     }
 
+    @Override
+    public boolean existMemberMission(Long missionId, Long memberId) {
+        return memberMissionRepository.existMissionByMemberId(missionId, memberId);
+    }
+
+    @Override
+    public Optional<MemberMission> findMemberMission(Long missionId) {
+        return memberMissionRepository.findById(missionId);
+    }
 
 }

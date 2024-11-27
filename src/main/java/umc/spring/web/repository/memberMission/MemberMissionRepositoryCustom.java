@@ -8,7 +8,6 @@ public interface MemberMissionRepositoryCustom {
 
 
     List<MemberMissionDto> findMemberMissionByStatus (Long memberId, String status, int cursor);
-
-
+    boolean existMissionByMemberId(Long missionId, Long memberId);
 
 }

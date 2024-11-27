@@ -2,6 +2,7 @@ package umc.spring.web.repository.memberMission;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Repository;
 import umc.spring.domain.QMission;
 import umc.spring.domain.QStore;
 import umc.spring.domain.enums.MissionStatus;
@@ -11,6 +12,7 @@ import umc.spring.web.dto.QMemberMissionDto;
 
 import java.util.List;
 
+@Repository
 @RequiredArgsConstructor
 public class MemberMissionRepositoryImpl implements MemberMissionRepositoryCustom{
 
@@ -41,6 +43,17 @@ public class MemberMissionRepositoryImpl implements MemberMissionRepositoryCusto
                         .orderBy(memberMission.id.desc())
                         .limit(10)
                         .fetch();
+    }
+
+    @Override
+    public boolean existMissionByMemberId(Long missionId, Long memberId) {
+        long cnt = jpaQueryFactory
+                .selectFrom(memberMission)
+                .where(memberMission.member.id.eq(memberId)
+                        .and(memberMission.mission.id.eq(missionId)))
+                .fetchCount();
+
+        return cnt > 0;
     }
 }
 

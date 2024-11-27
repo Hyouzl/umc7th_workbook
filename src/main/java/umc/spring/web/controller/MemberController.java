@@ -10,6 +10,7 @@ import umc.spring.apiPayload.ApiResponse;
 import umc.spring.converter.MemberConverter;
 import umc.spring.domain.Member;
 import umc.spring.service.member.MemberCommandService;
+import umc.spring.validation.annotation.ExistCategories;
 import umc.spring.web.dto.MemberRequestDto;
 import umc.spring.web.dto.MemberResponseDto;
 
@@ -20,7 +21,7 @@ public class MemberController {
     private final MemberCommandService memberCommandService;
 
     @PostMapping("/users")
-    public ApiResponse<MemberResponseDto.JoinResultDTO> join (@RequestBody @Valid MemberRequestDto.JoinDto request) {
+    public ApiResponse<MemberResponseDto.JoinResultDTO> join (@ExistCategories @RequestBody MemberRequestDto.JoinDto request) {
         Member member = memberCommandService.joinMember(request);
 
         return ApiResponse.onSuccess(MemberConverter.joinResultDTO(member));
