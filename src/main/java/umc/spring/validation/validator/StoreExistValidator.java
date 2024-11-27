@@ -5,18 +5,18 @@ import jakarta.validation.ConstraintValidatorContext;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import umc.spring.apiPayload.code.status.ErrorStatus;
-import umc.spring.service.mission.MissionQueryService;
-import umc.spring.validation.annotation.ExistMissions;
-
+import umc.spring.service.store.StoreQueryService;
+import umc.spring.validation.annotation.ExistStore;
 
 @Component
 @RequiredArgsConstructor
-public class MissionExistValidator implements ConstraintValidator<ExistMissions, Long> {
+public class StoreExistValidator implements ConstraintValidator<ExistStore, Long> {
 
-    private final MissionQueryService missionQueryService;
+    private final StoreQueryService storeQueryService;
+
 
     @Override
-    public void initialize(ExistMissions constraintAnnotation) {
+    public void initialize(ExistStore constraintAnnotation) {
         ConstraintValidator.super.initialize(constraintAnnotation);
     }
 
@@ -27,11 +27,11 @@ public class MissionExistValidator implements ConstraintValidator<ExistMissions,
             return false;
         }
 
-        boolean isValid = missionQueryService.findMission(value).isPresent();
+        boolean isValid = storeQueryService.findStore(value).isPresent();
 
         if (!isValid) {
             context.disableDefaultConstraintViolation();
-            context.buildConstraintViolationWithTemplate(ErrorStatus.MEMBER_MISSION_NOT_EXIST.toString()).addConstraintViolation();
+            context.buildConstraintViolationWithTemplate(ErrorStatus.STORE_NOT_FOUND.toString()).addConstraintViolation();
         }
 
         return isValid;

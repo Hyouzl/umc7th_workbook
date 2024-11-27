@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import umc.spring.domain.common.BaseEntity;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,8 +33,13 @@ public class Review extends BaseEntity {
 
     private float score;
 
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
+
     @OneToMany(mappedBy = "review", cascade = CascadeType.ALL)
     private List<ReviewImage> reviewImageList = new ArrayList<>();
+
+
 
 
     public void setMember(Member member) {

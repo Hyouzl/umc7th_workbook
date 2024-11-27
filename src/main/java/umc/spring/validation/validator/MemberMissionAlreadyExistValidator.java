@@ -11,7 +11,7 @@ import umc.spring.validation.annotation.AlreadyExistMemberMissions;
 
 @Component
 @RequiredArgsConstructor
-public class MemberMissionExistValidator implements ConstraintValidator<AlreadyExistMemberMissions, Long> {
+public class MemberMissionAlreadyExistValidator implements ConstraintValidator<AlreadyExistMemberMissions, Long> {
 
     private final MemberMissionService memberMissionService;
     @Override

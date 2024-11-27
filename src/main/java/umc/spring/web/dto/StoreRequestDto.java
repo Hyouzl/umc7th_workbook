@@ -4,6 +4,9 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
+import org.springframework.web.bind.annotation.PathVariable;
+import umc.spring.validation.annotation.CheckPage;
+import umc.spring.validation.annotation.ExistStore;
 
 public class StoreRequestDto {
 
@@ -16,6 +19,16 @@ public class StoreRequestDto {
         private String address;
         @NotNull
         private Long region;
+    }
+
+    @Getter
+    public static class reviewRequest {
+
+        @ExistStore
+        Long storeId;
+
+        @CheckPage
+        Integer page;
     }
 
 
