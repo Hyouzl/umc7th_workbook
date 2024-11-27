@@ -8,8 +8,8 @@ import umc.spring.converter.StoreConverter;
 import umc.spring.domain.Region;
 import umc.spring.domain.Store;
 import umc.spring.web.dto.StoreRequestDto;
-import umc.spring.web.repository.store.RegionRepository;
-import umc.spring.web.repository.store.StoreRepository;
+import umc.spring.repository.store.RegionRepository;
+import umc.spring.repository.store.StoreRepository;
 
 @Service
 @RequiredArgsConstructor

@@ -1,4 +1,4 @@
-package umc.spring.web.repository.review;
+package umc.spring.repository.review;
 
 public class ReviewRepositoryImpl implements ReviewRepositoryCustom{
 }

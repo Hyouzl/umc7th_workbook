@@ -7,7 +7,6 @@ import org.springframework.stereotype.Component;
 import umc.spring.apiPayload.code.status.ErrorStatus;
 import umc.spring.domain.FoodCategory;
 import umc.spring.validation.annotation.ExistCategories;
-import umc.spring.web.repository.member.FoodCategoryRepository;
 
 import java.util.List;
 

@@ -11,9 +11,9 @@ import umc.spring.domain.Member;
 import umc.spring.domain.Mission;
 import umc.spring.domain.mapping.MemberMission;
 import umc.spring.web.dto.MemberMissionDto;
-import umc.spring.web.repository.member.MemberRepository;
-import umc.spring.web.repository.memberMission.MemberMissionRepository;
-import umc.spring.web.repository.mission.MissionRepository;
+import umc.spring.repository.member.MemberRepository;
+import umc.spring.repository.memberMission.MemberMissionRepository;
+import umc.spring.repository.mission.MissionRepository;
 
 import java.util.List;
 import java.util.Optional;

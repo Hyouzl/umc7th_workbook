@@ -1,4 +1,4 @@
-package umc.spring.web.repository.mission;
+package umc.spring.repository.mission;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;

@@ -23,6 +23,33 @@ public class StoreResponseDto {
         LocalDateTime createdAt;
     }
 
+    @Builder
+    @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class MissionPreviewListDto {
+
+        List<MissionPreviewDto> missionList;
+        Integer listSize;
+        Integer totalPage;
+        Long totalElements;
+        Boolean isFirst;
+        Boolean isLast;
+
+    }
+
+    @Builder
+    @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class MissionPreviewDto {
+
+        String storeName;
+        String missionSpec;
+        int reward;
+        LocalDate deadline;
+
+    }
 
     @Builder
     @Getter

@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import umc.spring.apiPayload.code.status.ErrorStatus;
 import umc.spring.apiPayload.exception.handler.FoodCategoryHandler;
 import umc.spring.domain.FoodCategory;
-import umc.spring.web.repository.member.FoodCategoryRepository;
+import umc.spring.repository.member.FoodCategoryRepository;
 
 
 @Service

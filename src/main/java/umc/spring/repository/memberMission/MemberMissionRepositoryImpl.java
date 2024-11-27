@@ -1,4 +1,4 @@
-package umc.spring.web.repository.memberMission;
+package umc.spring.repository.memberMission;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;

@@ -1,6 +1,5 @@
-package umc.spring.web.repository.member;
+package umc.spring.repository.member;
 
-import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;

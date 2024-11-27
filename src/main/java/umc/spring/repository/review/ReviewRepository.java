@@ -1,4 +1,4 @@
-package umc.spring.web.repository.review;
+package umc.spring.repository.review;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

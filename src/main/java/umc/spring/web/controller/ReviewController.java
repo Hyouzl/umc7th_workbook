@@ -29,11 +29,4 @@ public class ReviewController {
         return ApiResponse.onSuccess(ReviewConverter.resultDto(review));
     }
 
-    @GetMapping("/reviews")
-    public ApiResponse<StoreResponseDto.ReviewPreviewListDto> getReviewList () {
-
-
-        return null;
-    }
-
 }
