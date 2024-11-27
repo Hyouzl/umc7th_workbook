@@ -1,5 +1,6 @@
 package umc.spring.web.controller;
 
+
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -23,6 +24,7 @@ import umc.spring.web.dto.MemberRequestDto;
 import umc.spring.web.dto.MemberResponseDto;
 import umc.spring.web.dto.MissionResponseDto;
 
+
 @RestController
 @RequiredArgsConstructor
 @Validated
@@ -30,6 +32,7 @@ public class MemberController {
 
     private final MemberCommandService memberCommandService;
     private final MemberQueryService memberQueryService;
+
     @PostMapping("/users")
     public ApiResponse<MemberResponseDto.JoinResultDTO> join (@ExistCategories @RequestBody MemberRequestDto.JoinDto request) {
         Member member = memberCommandService.joinMember(request);
@@ -70,5 +73,7 @@ public class MemberController {
 
         return ApiResponse.onSuccess(MemberMissionConverter.memberMissionListInChallengingPreviewDto(getMyMissionList));
     }
+
+
 
 }
