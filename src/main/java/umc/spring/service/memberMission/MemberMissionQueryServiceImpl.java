@@ -2,7 +2,10 @@ package umc.spring.service.memberMission;
 
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import umc.spring.apiPayload.code.status.ErrorStatus;
 import umc.spring.apiPayload.exception.handler.MemberHandler;
 import umc.spring.apiPayload.exception.handler.MissionHandler;
@@ -20,12 +23,11 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class MemberMissionServiceImpl implements MemberMissionService {
-
+@Transactional(readOnly = true)
+public class MemberMissionQueryServiceImpl implements MemberMissionQueryService {
 
     private final MemberMissionRepository memberMissionRepository;
     private final MemberRepository memberRepository;
-    private final MissionRepository missionRepository;
 
     @Override
     public List<MemberMissionDto> findMemberMissionByMemberIdAndStatus(Long memberId, String status, int cursor) {
@@ -40,25 +42,6 @@ public class MemberMissionServiceImpl implements MemberMissionService {
     }
 
     @Override
-    public MemberMission addMemberMission(MemberMissionDto.addMemberMissionDto addMemberMissionDto) {
-
-        Mission mission = missionRepository.findById(addMemberMissionDto.getMissionId()).orElseThrow(() ->
-                new MissionHandler(ErrorStatus.MISSION_NOT_FOUND));
-
-        // 유저 하드 코딩
-        Member member = memberRepository.findById(1L).orElseThrow(() ->
-                new MemberHandler(ErrorStatus.MEMBER_NOT_FOUND));
-
-
-        MemberMission memberMission = MemberMissionConverter.toMemberMission(addMemberMissionDto);
-
-        memberMission.setMember(member);
-        memberMission.setMission(mission);
-
-        return memberMissionRepository.save(memberMission);
-    }
-
-    @Override
     public boolean existMemberMission(Long missionId, Long memberId) {
         return memberMissionRepository.existMissionByMemberId(missionId, memberId);
     }
@@ -67,5 +50,26 @@ public class MemberMissionServiceImpl implements MemberMissionService {
     public Optional<MemberMission> findMemberMission(Long memberMissionId) {
         return memberMissionRepository.findById(memberMissionId);
     }
+
+    @Override
+    public Page<MemberMission> getMyMissionList(Integer page) {
+
+        // 유저 하드 코딩
+        Member member = memberRepository.findById(1L).get();
+        Page<MemberMission> pageMemberMissionList = memberMissionRepository.findByMember(member, PageRequest.of(page, 10));
+
+
+        return pageMemberMissionList;
+    }
+
+    @Override
+    public MemberMission updateMemberMissionStatus(Long memberMissionId) {
+
+        MemberMission memberMission = memberMissionRepository.findById(memberMissionId).get();
+        memberMission.completedMission();
+
+        return memberMissionRepository.save(memberMission);
+    }
+
 
 }

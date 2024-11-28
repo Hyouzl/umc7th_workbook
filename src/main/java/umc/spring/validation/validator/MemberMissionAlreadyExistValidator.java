@@ -6,14 +6,14 @@ import jakarta.validation.ConstraintValidatorContext;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import umc.spring.apiPayload.code.status.ErrorStatus;
-import umc.spring.service.memberMission.MemberMissionService;
+import umc.spring.service.memberMission.MemberMissionQueryService;
 import umc.spring.validation.annotation.AlreadyExistMemberMissions;
 
 @Component
 @RequiredArgsConstructor
 public class MemberMissionAlreadyExistValidator implements ConstraintValidator<AlreadyExistMemberMissions, Long> {
 
-    private final MemberMissionService memberMissionService;
+    private final MemberMissionQueryService memberMissionService;
     @Override
     public void initialize(AlreadyExistMemberMissions constraintAnnotation) {
         ConstraintValidator.super.initialize(constraintAnnotation);

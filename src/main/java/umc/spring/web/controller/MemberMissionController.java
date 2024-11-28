@@ -10,10 +10,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 import umc.spring.apiPayload.ApiResponse;
 import umc.spring.converter.MemberMissionConverter;
-import umc.spring.converter.MissionConverter;
 import umc.spring.domain.mapping.MemberMission;
 import umc.spring.service.member.MemberQueryService;
-import umc.spring.service.memberMission.MemberMissionService;
+import umc.spring.service.memberMission.MemberMissionCommandService;
+import umc.spring.service.memberMission.MemberMissionQueryService;
 import umc.spring.validation.annotation.CheckPage;
 import umc.spring.web.dto.MemberMissionDto;
 import umc.spring.web.dto.MemberResponseDto;
@@ -22,8 +22,9 @@ import umc.spring.web.dto.MemberResponseDto;
 @RequiredArgsConstructor
 public class MemberMissionController {
 
-    private final MemberMissionService memberMissionService;
-    private final MemberQueryService memberQueryService;
+    private final MemberMissionQueryService memberMissionQueryService;
+    private final MemberMissionCommandService memberMissionCommandService;
+
 
     @PostMapping("/users/missions")
     @Operation(summary = "멤버 미션 추가 API",description = "멤버가 도전하는 미션을 추가하는 API이다.")
@@ -34,7 +35,7 @@ public class MemberMissionController {
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "AUTH006", description = "acess 토큰 모양이 이상함",content = @Content(schema = @Schema(implementation = ApiResponse.class))),
     })
     public ApiResponse<MemberMissionDto.resultAddMemberMission> addMemberMission (@RequestBody @Valid MemberMissionDto.addMemberMissionDto request) {
-        MemberMission memberMission = memberMissionService.addMemberMission(request);
+        MemberMission memberMission = memberMissionCommandService.addMemberMission(request);
 
         return ApiResponse.onSuccess(MemberMissionConverter.resultAddMemberMission(memberMission));
     }
@@ -49,7 +50,7 @@ public class MemberMissionController {
     })
     public ApiResponse<MemberResponseDto.memberMissionListPreviewDto> getMissionList (@CheckPage @RequestParam(name = "page") Integer page) {
 
-        Page<MemberMission> getMyMissionList = memberQueryService.getMyMissionList(page-1);
+        Page<MemberMission> getMyMissionList = memberMissionQueryService.getMyMissionList(page-1);
 
         return ApiResponse.onSuccess(MemberMissionConverter.memberMissionListInChallengingPreviewDto(getMyMissionList));
     }
@@ -65,7 +66,7 @@ public class MemberMissionController {
     public ApiResponse<MemberResponseDto.memberMissionPreviewDto> updateMissionStatus (@RequestBody @Valid MemberMissionDto.updateMemberMissionStatusDto request) {
 
         System.out.println(request.getMemberMissionId());
-        MemberMission memberMission = memberQueryService.updateMemberMissionStatus(request.getMemberMissionId());
+        MemberMission memberMission = memberMissionQueryService.updateMemberMissionStatus(request.getMemberMissionId());
 
         return ApiResponse.onSuccess(MemberMissionConverter.memberMissionPreviewDto(memberMission));
     }

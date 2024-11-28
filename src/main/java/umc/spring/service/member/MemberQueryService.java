@@ -10,8 +10,5 @@ public interface MemberQueryService {
 
     MemberDto findMemberInMyPage(Long memberId);
     Page<Review> getMyReviewList(Integer page);
-    Page<MemberMission> getMyMissionList(Integer page);
-
-    MemberMission updateMemberMissionStatus(Long memberMissionId);
 
 }
