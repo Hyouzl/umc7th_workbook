@@ -22,7 +22,6 @@ import umc.spring.repository.member.MemberRepository;
 public class MemberQueryServiceImpl implements MemberQueryService{
 
     private final MemberRepository memberRepository;
-    private final ReviewRepository reviewRepository;
 
     @Override
     public MemberDto findMemberInMyPage(Long memberId) {
@@ -30,16 +29,6 @@ public class MemberQueryServiceImpl implements MemberQueryService{
         MemberDto memberDto = memberRepository.findMemberInMyPage(memberId);
 
         return memberDto;
-    }
-
-    @Override
-    public Page<Review> getMyReviewList(Integer page) {
-
-        // 유저 하드 코딩
-        Member member = memberRepository.findById(1L).get();
-        Page<Review> pageReviewList = reviewRepository.findByMember(member, PageRequest.of(page, 10));
-
-        return pageReviewList;
     }
 
 }

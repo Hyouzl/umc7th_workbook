@@ -9,6 +9,5 @@ import umc.spring.web.dto.MemberDto;
 public interface MemberQueryService {
 
     MemberDto findMemberInMyPage(Long memberId);
-    Page<Review> getMyReviewList(Integer page);
 
 }
