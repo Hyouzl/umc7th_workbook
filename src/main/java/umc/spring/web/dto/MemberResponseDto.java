@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import umc.spring.domain.enums.MissionStatus;
 import umc.spring.domain.mapping.MemberMission;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -47,5 +48,33 @@ public class MemberResponseDto {
         Long totalElements;
         Boolean isFirst;
         Boolean isLast;
+    }
+
+    @Builder
+    @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class reviewReviewDto {
+
+        String storeName;
+        String ownerNickname;
+        float score;
+        String body;
+        LocalDate createdAt;
+
+    }
+
+    @Builder
+    @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class reviewReviewListDto {
+        List<reviewReviewDto> reviewReviewDtoList;
+        Integer listSize;
+        Integer totalPage;
+        Long totalElements;
+        Boolean isFirst;
+        Boolean isLast;
+
     }
 }

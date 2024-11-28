@@ -20,32 +20,4 @@ public class MissionResponseDto {
         String missionSpec;
     }
 
-
-    @Builder
-    @Getter
-    @NoArgsConstructor
-    @AllArgsConstructor
-    public static class reviewReviewDto {
-
-        String storeName;
-        String ownerNickname;
-        float score;
-        String body;
-        LocalDate createdAt;
-
-    }
-
-    @Builder
-    @Getter
-    @NoArgsConstructor
-    @AllArgsConstructor
-    public static class reviewReviewListDto {
-        List<reviewReviewDto> reviewReviewDtoList;
-        Integer listSize;
-        Integer totalPage;
-        Long totalElements;
-        Boolean isFirst;
-        Boolean isLast;
-
-    }
 }

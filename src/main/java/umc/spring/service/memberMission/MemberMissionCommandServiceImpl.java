@@ -32,8 +32,7 @@ public class MemberMissionCommandServiceImpl implements MemberMissionCommandServ
         Member member = memberRepository.findById(1L).orElseThrow(() ->
                 new MemberHandler(ErrorStatus.MEMBER_NOT_FOUND));
 
-
-        MemberMission memberMission = MemberMissionConverter.toMemberMission(addMemberMissionDto);
+        MemberMission memberMission = MemberMissionConverter.toMemberMission();
 
         memberMission.setMember(member);
         memberMission.setMission(mission);

@@ -8,8 +8,10 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import umc.spring.apiPayload.ApiResponse;
+import umc.spring.converter.MemberConverter;
 import umc.spring.converter.MissionConverter;
 import umc.spring.converter.ReviewConverter;
 import umc.spring.domain.Review;
@@ -17,13 +19,11 @@ import umc.spring.service.member.MemberQueryService;
 import umc.spring.service.review.ReviewCommandService;
 import umc.spring.service.review.ReviewQueryService;
 import umc.spring.validation.annotation.CheckPage;
-import umc.spring.web.dto.MissionResponseDto;
-import umc.spring.web.dto.ReviewRequestDto;
-import umc.spring.web.dto.ReviewResponseDto;
-import umc.spring.web.dto.StoreResponseDto;
+import umc.spring.web.dto.*;
 
 @RestController
 @RequiredArgsConstructor
+@Validated
 public class ReviewController {
 
     private final ReviewCommandService reviewCommandService;
@@ -45,10 +45,10 @@ public class ReviewController {
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "AUTH004", description = "acess 토큰 만료",content = @Content(schema = @Schema(implementation = ApiResponse.class))),
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "AUTH006", description = "acess 토큰 모양이 이상함",content = @Content(schema = @Schema(implementation = ApiResponse.class))),
     })
-    public ApiResponse<MissionResponseDto.reviewReviewListDto> getReviewList (@CheckPage @RequestParam(name = "page") Integer page){
+    public ApiResponse<MemberResponseDto.reviewReviewListDto> getReviewList (@CheckPage @RequestParam(name = "page") Integer page){
 
         Page<Review> getMyReviewList = reviewQueryService.getMyReviewList(page-1);
 
-        return ApiResponse.onSuccess(MissionConverter.reviewReviewListDto(getMyReviewList));
+        return ApiResponse.onSuccess(MemberConverter.reviewReviewListDto(getMyReviewList));
     }
 }

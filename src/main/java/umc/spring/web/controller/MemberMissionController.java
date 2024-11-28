@@ -7,8 +7,10 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import umc.spring.apiPayload.ApiResponse;
+import umc.spring.converter.MemberConverter;
 import umc.spring.converter.MemberMissionConverter;
 import umc.spring.domain.mapping.MemberMission;
 import umc.spring.service.member.MemberQueryService;
@@ -20,6 +22,7 @@ import umc.spring.web.dto.MemberResponseDto;
 
 @RestController
 @RequiredArgsConstructor
+@Validated
 public class MemberMissionController {
 
     private final MemberMissionQueryService memberMissionQueryService;
@@ -52,7 +55,7 @@ public class MemberMissionController {
 
         Page<MemberMission> getMyMissionList = memberMissionQueryService.getMyMissionList(page-1);
 
-        return ApiResponse.onSuccess(MemberMissionConverter.memberMissionListInChallengingPreviewDto(getMyMissionList));
+        return ApiResponse.onSuccess(MemberConverter.memberMissionListInChallengingPreviewDto(getMyMissionList));
     }
 
     @PatchMapping("/users/missions")
@@ -68,7 +71,7 @@ public class MemberMissionController {
         System.out.println(request.getMemberMissionId());
         MemberMission memberMission = memberMissionQueryService.updateMemberMissionStatus(request.getMemberMissionId());
 
-        return ApiResponse.onSuccess(MemberMissionConverter.memberMissionPreviewDto(memberMission));
+        return ApiResponse.onSuccess(MemberConverter.memberMissionPreviewDto(memberMission));
     }
 
 }

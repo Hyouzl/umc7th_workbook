@@ -31,6 +31,24 @@ public class StoreRequestDto {
         Integer page;
     }
 
+    @Getter
+    public static class addReviewDto {
+
+        @NotNull
+        Long memberId;
+
+        @NotNull
+        Long storeId;
+
+        @NotNull
+        String body;
+
+        @NotNull
+        float score;
+
+
+    }
+
 
 
 }

@@ -79,4 +79,6 @@ public class StoreResponseDto {
         LocalDate createdAt;
 
     }
+
+
 }
