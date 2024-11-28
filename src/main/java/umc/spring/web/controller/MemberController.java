@@ -34,7 +34,6 @@ import umc.spring.web.dto.MissionResponseDto;
 public class MemberController {
 
     private final MemberCommandService memberCommandService;
-    private final MemberQueryService memberQueryService;
 
     @PostMapping("/users")
     public ApiResponse<MemberResponseDto.JoinResultDTO> join (@ExistCategories @RequestBody MemberRequestDto.JoinDto request) {
@@ -43,56 +42,6 @@ public class MemberController {
         return ApiResponse.onSuccess(MemberConverter.joinResultDTO(member));
     }
 
-    @GetMapping("/users/reivews")
-    //@Operation은 이 API에 대한 설명을 넣게 되며 summary, description으로 설명을 적습니다.
-    @Operation(summary = "내가 작성한 리뷰 목록 조회 API",description = "내가 작성한 리뷰 목록 조회하는 API이며, 페이징을 포함합니다. query String 으로 page 번호를 주세요")
-    //@ApiResponses로 이 API의 응답을 담게 되며 내부적으로 @ApiResponse로 각각의 응답들을 담게 됩니다.
-    @ApiResponses({
-            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "COMMON200",description = "OK, 성공"),
-            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "AUTH003", description = "access 토큰을 주세요!",content = @Content(schema = @Schema(implementation = ApiResponse.class))),
-            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "AUTH004", description = "acess 토큰 만료",content = @Content(schema = @Schema(implementation = ApiResponse.class))),
-            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "AUTH006", description = "acess 토큰 모양이 이상함",content = @Content(schema = @Schema(implementation = ApiResponse.class))),
-    })
-    public ApiResponse<MissionResponseDto.reviewReviewListDto> getReviewList (@CheckPage @RequestParam(name = "page") Integer page){
 
-        Page<Review> getMyReviewList = memberQueryService.getMyReviewList(page-1);
-
-        return ApiResponse.onSuccess(MissionConverter.reviewReviewListDto(getMyReviewList));
-    }
-
-    @GetMapping("/users/missions")
-    //@Operation은 이 API에 대한 설명을 넣게 되며 summary, description으로 설명을 적습니다.
-    @Operation(summary = "내가 진행중인 미션 목록 조회 API",description = "내가 진행중인 미션 목록 조회하는 API이며, 페이징을 포함합니다. query String 으로 page 번호를 주세요")
-    //@ApiResponses로 이 API의 응답을 담게 되며 내부적으로 @ApiResponse로 각각의 응답들을 담게 됩니다.
-    @ApiResponses({
-            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "COMMON200",description = "OK, 성공"),
-            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "AUTH003", description = "access 토큰을 주세요!",content = @Content(schema = @Schema(implementation = ApiResponse.class))),
-            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "AUTH004", description = "acess 토큰 만료",content = @Content(schema = @Schema(implementation = ApiResponse.class))),
-            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "AUTH006", description = "acess 토큰 모양이 이상함",content = @Content(schema = @Schema(implementation = ApiResponse.class))),
-    })
-    public ApiResponse<MemberResponseDto.memberMissionListPreviewDto> getMissionList (@CheckPage @RequestParam(name = "page") Integer page) {
-
-        Page<MemberMission> getMyMissionList = memberQueryService.getMyMissionList(page-1);
-
-        return ApiResponse.onSuccess(MemberMissionConverter.memberMissionListInChallengingPreviewDto(getMyMissionList));
-    }
-
-    @PatchMapping("/users/missions")
-    //@Operation은 이 API에 대한 설명을 넣게 되며 summary, description으로 설명을 적습니다.
-    @Operation(summary = "진행중인 미션 진행 완료로 바꾸기 API",description = "진행중인 미션 진행 완료로 바꾸는 API")
-    //@ApiResponses로 이 API의 응답을 담게 되며 내부적으로 @ApiResponse로 각각의 응답들을 담게 됩니다.
-    @ApiResponses({
-            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "COMMON200",description = "OK, 성공"),
-            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "AUTH003", description = "access 토큰을 주세요!",content = @Content(schema = @Schema(implementation = ApiResponse.class))),
-            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "AUTH004", description = "acess 토큰 만료",content = @Content(schema = @Schema(implementation = ApiResponse.class))),
-            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "AUTH006", description = "acess 토큰 모양이 이상함",content = @Content(schema = @Schema(implementation = ApiResponse.class))),
-    })
-    public ApiResponse<MemberResponseDto.memberMissionPreviewDto> updateMissionStatus (@RequestBody @Valid MemberMissionDto.updateMemberMissionStatusDto request) {
-
-        System.out.println(request.getMemberMissionId());
-        MemberMission memberMission = memberQueryService.updateMemberMissionStatus(request.getMemberMissionId());
-
-        return ApiResponse.onSuccess(MemberMissionConverter.memberMissionPreviewDto(memberMission));
-    }
 
 }
