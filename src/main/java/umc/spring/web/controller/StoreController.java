@@ -32,7 +32,19 @@ public class StoreController {
     private final StoreCommandService storeCommandService;
     private final StoreQueryService storeQueryService;
 
+
+    /**
+     * 특정 가게 등록 API
+     * **/
     @PostMapping("/stores")
+    @Operation(summary = "특정 가게 등록 API",description = "특정 가게 등록 API")
+    //@ApiResponses로 이 API의 응답을 담게 되며 내부적으로 @ApiResponse로 각각의 응답들을 담게 됩니다.
+    @ApiResponses({
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "COMMON200",description = "OK, 성공"),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "AUTH003", description = "access 토큰을 주세요!",content = @Content(schema = @Schema(implementation = ApiResponse.class))),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "AUTH004", description = "acess 토큰 만료",content = @Content(schema = @Schema(implementation = ApiResponse.class))),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "AUTH006", description = "acess 토큰 모양이 이상함",content = @Content(schema = @Schema(implementation = ApiResponse.class))),
+    })
     public ApiResponse<StoreResponseDto.addResultDTO> addStore (@RequestBody @Valid StoreRequestDto.addStoreDto request) {
 
         Store store = storeCommandService.addStore(request);
@@ -40,6 +52,9 @@ public class StoreController {
 
     }
 
+    /**
+     * 특정 가게의 리뷰 목록 조회 API
+     * **/
     @GetMapping("/{storeId}/reviews")
     //@Operation은 이 API에 대한 설명을 넣게 되며 summary, description으로 설명을 적습니다.
     @Operation(summary = "특정 가게의 리뷰 목록 조회 API",description = "특정 가게의 리뷰들의 목록을 조회하는 API이며, 페이징을 포함합니다. query String 으로 page 번호를 주세요")
@@ -60,6 +75,9 @@ public class StoreController {
     }
 
 
+    /**
+     * 특정 가게의 미션 목록 조회 API
+     * **/
     @GetMapping("/{storeId}/missions")
     //@Operation은 이 API에 대한 설명을 넣게 되며 summary, description으로 설명을 적습니다.
     @Operation(summary = "특정 가게의 미션 목록 조회 API",description = "특정 가게의 미션들의 목록을 조회하는 API이며, 페이징을 포함합니다. query String 으로 page 번호를 주세요")

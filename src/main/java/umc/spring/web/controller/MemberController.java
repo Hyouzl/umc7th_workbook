@@ -35,13 +35,23 @@ public class MemberController {
 
     private final MemberCommandService memberCommandService;
 
+    /**
+     * 회원가입 API
+     * **/
     @PostMapping("/users")
+    @Operation(summary = "회원가입 API",description = "유저 회원가입 API")
+    //@ApiResponses로 이 API의 응답을 담게 되며 내부적으로 @ApiResponse로 각각의 응답들을 담게 됩니다.
+    @ApiResponses({
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "COMMON200",description = "OK, 성공"),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "AUTH003", description = "access 토큰을 주세요!",content = @Content(schema = @Schema(implementation = ApiResponse.class))),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "AUTH004", description = "acess 토큰 만료",content = @Content(schema = @Schema(implementation = ApiResponse.class))),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "AUTH006", description = "acess 토큰 모양이 이상함",content = @Content(schema = @Schema(implementation = ApiResponse.class))),
+    })
     public ApiResponse<MemberResponseDto.JoinResultDTO> join (@ExistCategories @RequestBody MemberRequestDto.JoinDto request) {
         Member member = memberCommandService.joinMember(request);
 
         return ApiResponse.onSuccess(MemberConverter.joinResultDTO(member));
     }
-
 
 
 }
