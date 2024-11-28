@@ -23,13 +23,8 @@ public class MissionController {
 
     private final MissionCommandService missionCommandService;
 
-    /**
-     * 특정 가게 미션 등록 API
-     * **/
     @PostMapping("/missions")
-    //@Operation은 이 API에 대한 설명을 넣게 되며 summary, description으로 설명을 적습니다.
     @Operation(summary = "특정 가게 미션 등록 API", description = "특정 가게에 미션을 등록하는 API")
-    //@ApiResponses로 이 API의 응답을 담게 되며 내부적으로 @ApiResponse로 각각의 응답들을 담게 됩니다.
     @ApiResponses({
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "COMMON200",description = "OK, 성공"),
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "AUTH003", description = "access 토큰을 주세요!",content = @Content(schema = @Schema(implementation = ApiResponse.class))),

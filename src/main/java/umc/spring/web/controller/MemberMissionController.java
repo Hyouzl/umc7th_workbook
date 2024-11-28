@@ -25,13 +25,8 @@ public class MemberMissionController {
     private final MemberMissionService memberMissionService;
     private final MemberQueryService memberQueryService;
 
-    /**
-     * 멤버 미션 추가 API
-     * **/
     @PostMapping("/users/missions")
-    //@Operation은 이 API에 대한 설명을 넣게 되며 summary, description으로 설명을 적습니다.
     @Operation(summary = "멤버 미션 추가 API",description = "멤버가 도전하는 미션을 추가하는 API이다.")
-    //@ApiResponses로 이 API의 응답을 담게 되며 내부적으로 @ApiResponse로 각각의 응답들을 담게 됩니다.
     @ApiResponses({
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "COMMON200",description = "OK, 성공"),
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "AUTH003", description = "access 토큰을 주세요!",content = @Content(schema = @Schema(implementation = ApiResponse.class))),
@@ -44,14 +39,8 @@ public class MemberMissionController {
         return ApiResponse.onSuccess(MemberMissionConverter.resultAddMemberMission(memberMission));
     }
 
-
-    /**
-     * 내가 진행중인 미션 목록 조회 API
-     * **/
     @GetMapping("/users/missions")
-    //@Operation은 이 API에 대한 설명을 넣게 되며 summary, description으로 설명을 적습니다.
     @Operation(summary = "내가 진행중인 미션 목록 조회 API",description = "내가 진행중인 미션 목록 조회하는 API이며, 페이징을 포함합니다. query String 으로 page 번호를 주세요")
-    //@ApiResponses로 이 API의 응답을 담게 되며 내부적으로 @ApiResponse로 각각의 응답들을 담게 됩니다.
     @ApiResponses({
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "COMMON200",description = "OK, 성공"),
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "AUTH003", description = "access 토큰을 주세요!",content = @Content(schema = @Schema(implementation = ApiResponse.class))),
@@ -65,14 +54,8 @@ public class MemberMissionController {
         return ApiResponse.onSuccess(MemberMissionConverter.memberMissionListInChallengingPreviewDto(getMyMissionList));
     }
 
-
-    /**
-     * 내가 진행중인 미션 진행 완료로 바꾸기 API
-     * **/
     @PatchMapping("/users/missions")
-    //@Operation은 이 API에 대한 설명을 넣게 되며 summary, description으로 설명을 적습니다.
     @Operation(summary = "진행중인 미션 진행 완료로 바꾸기 API",description = "진행중인 미션 진행 완료로 바꾸는 API")
-    //@ApiResponses로 이 API의 응답을 담게 되며 내부적으로 @ApiResponse로 각각의 응답들을 담게 됩니다.
     @ApiResponses({
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "COMMON200",description = "OK, 성공"),
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "AUTH003", description = "access 토큰을 주세요!",content = @Content(schema = @Schema(implementation = ApiResponse.class))),

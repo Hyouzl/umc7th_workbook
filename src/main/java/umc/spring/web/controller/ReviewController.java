@@ -28,10 +28,6 @@ public class ReviewController {
     private final ReviewCommandService reviewCommandService;
     private final MemberQueryService memberQueryService;
 
-
-    /**
-     * 특정 가게 리뷰 등록 API
-     * **/
     @PostMapping("/reviews")
     public ApiResponse<ReviewResponseDto.addResultDto> addReview (@RequestBody @Valid ReviewRequestDto.addReviewDto request) {
 
@@ -40,13 +36,8 @@ public class ReviewController {
         return ApiResponse.onSuccess(ReviewConverter.resultDto(review));
     }
 
-    /**
-     *  내가 작성한 리뷰 목록 조회 API
-     * **/
     @GetMapping("/users/reivews")
-    //@Operation은 이 API에 대한 설명을 넣게 되며 summary, description으로 설명을 적습니다.
     @Operation(summary = "내가 작성한 리뷰 목록 조회 API",description = "내가 작성한 리뷰 목록 조회하는 API이며, 페이징을 포함합니다. query String 으로 page 번호를 주세요")
-    //@ApiResponses로 이 API의 응답을 담게 되며 내부적으로 @ApiResponse로 각각의 응답들을 담게 됩니다.
     @ApiResponses({
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "COMMON200",description = "OK, 성공"),
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "AUTH003", description = "access 토큰을 주세요!",content = @Content(schema = @Schema(implementation = ApiResponse.class))),
