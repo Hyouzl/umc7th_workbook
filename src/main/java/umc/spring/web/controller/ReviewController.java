@@ -45,10 +45,10 @@ public class ReviewController {
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "AUTH004", description = "acess 토큰 만료",content = @Content(schema = @Schema(implementation = ApiResponse.class))),
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "AUTH006", description = "acess 토큰 모양이 이상함",content = @Content(schema = @Schema(implementation = ApiResponse.class))),
     })
-    public ApiResponse<MemberResponseDto.reviewReviewListDto> getReviewList (@CheckPage @RequestParam(name = "page") Integer page){
+    public ApiResponse<MemberResponseDto.ReviewPreviewListDto> getReviewList (@CheckPage @RequestParam(name = "page") Integer page){
 
         Page<Review> getMyReviewList = reviewQueryService.getMyReviewList(page-1);
 
-        return ApiResponse.onSuccess(MemberConverter.reviewReviewListDto(getMyReviewList));
+        return ApiResponse.onSuccess(MemberConverter.reviewPreviewListDto(getMyReviewList));
     }
 }

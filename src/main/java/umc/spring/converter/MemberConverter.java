@@ -53,9 +53,9 @@ public class MemberConverter {
 
 
 
-    public static MemberResponseDto.reviewReviewDto reviewReviewDto (Review review) {
+    public static MemberResponseDto.ReviewPreviewDto reviewReviewDto (Review review) {
 
-        return MemberResponseDto.reviewReviewDto.builder()
+        return MemberResponseDto.ReviewPreviewDto.builder()
                 .storeName(review.getStore().getName())
                 .ownerNickname(review.getMember().getName())
                 .body(review.getBody())
@@ -65,11 +65,11 @@ public class MemberConverter {
 
     }
 
-    public static MemberResponseDto.reviewReviewListDto reviewReviewListDto (Page<Review> pageReviewList) {
-        List<MemberResponseDto.reviewReviewDto> reviewReviewDtoList
+    public static MemberResponseDto.ReviewPreviewListDto reviewPreviewListDto (Page<Review> pageReviewList) {
+        List<MemberResponseDto.ReviewPreviewDto> reviewReviewDtoList
                 = pageReviewList.stream().map(MemberConverter::reviewReviewDto).collect(Collectors.toList());
 
-        return MemberResponseDto.reviewReviewListDto.builder()
+        return MemberResponseDto.ReviewPreviewListDto.builder()
                 .reviewReviewDtoList(reviewReviewDtoList)
                 .listSize(pageReviewList.getSize())
                 .totalPage(pageReviewList.getTotalPages())

@@ -54,7 +54,7 @@ public class MemberResponseDto {
     @Getter
     @NoArgsConstructor
     @AllArgsConstructor
-    public static class reviewReviewDto {
+    public static class ReviewPreviewDto {
 
         String storeName;
         String ownerNickname;
@@ -68,8 +68,8 @@ public class MemberResponseDto {
     @Getter
     @NoArgsConstructor
     @AllArgsConstructor
-    public static class reviewReviewListDto {
-        List<reviewReviewDto> reviewReviewDtoList;
+    public static class ReviewPreviewListDto {
+        List<ReviewPreviewDto> reviewReviewDtoList;
         Integer listSize;
         Integer totalPage;
         Long totalElements;
