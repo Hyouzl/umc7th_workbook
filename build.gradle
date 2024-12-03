@@ -53,6 +53,13 @@ dependencies {
 	implementation 'com.fasterxml.jackson.core:jackson-core:2.15.2' // Jackson Core
 	implementation 'com.fasterxml.jackson.core:jackson-annotations:2.15.2' // Jackson Annotations
 
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+
+	// security 의존성 추가
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	testImplementation 'org.springframework.security:spring-security-test'
+
+	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6:3.1.1.RELEASE'
 
 
 

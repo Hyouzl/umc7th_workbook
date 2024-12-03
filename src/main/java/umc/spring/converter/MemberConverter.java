@@ -31,22 +31,19 @@ public class MemberConverter {
         Gender gender = null;
 
         switch (request.getGender()) {
-            case 1:
-                gender = Gender.MALE;
-                break;
-            case 2:
-                gender = Gender.FEMALE;
-                break;
-            case 3:
-                gender = Gender.NONE;
-                break;
+            case 1: gender = Gender.MALE; break;
+            case 2: gender = Gender.FEMALE; break;
+            case 3: gender = Gender.NONE; break;
         }
 
         return Member.builder()
                 .address(request.getAddress())
+                .email(request.getEmail())   // 추가된 코드
+                .password(request.getPassword())   // 추가된 코드
                 .specAddress(request.getSpecAddress())
                 .gender(gender)
                 .name(request.getName())
+                .role(request.getRole())   // 추가된 코드
                 .memberPreferList(new ArrayList<>())
                 .build();
     }
