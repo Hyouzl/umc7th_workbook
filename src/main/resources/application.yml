@@ -18,3 +18,12 @@ spring:
       mode: never
 
 
+
+logging:
+  level:
+    org:
+      springframework:
+        security: DEBUG
+
+
+
